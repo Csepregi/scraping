@@ -1,19 +1,24 @@
 const articlesRouter = require('express').Router()
 const cheerio = require('cheerio')
-// const axios = require('axios')
 const request = require('request-promise')
 
-articlesRouter.get('/', async (req, res) => {
-	const baseUrl = 'https://blog.risingstack.com'
-	const mainhtml = await request(baseUrl)
+const siteUrl = 'https://blog.risingstack.com/page/1/'
+const mainUrl = 'https://blog.risingstack.com/'
+
+const fetchData = async (siteUrl) => {
+	const result = await request(siteUrl);
+	return cheerio.load(result);
+};
+
+const getResults = async (siteUrl) => {
 	const articles = [];
-	const $ = cheerio.load(mainhtml);
+	const $ = await fetchData(siteUrl)
 	$('.post-header').each((index, element) => {
 		const title = $(element)
 			.children()
 			.first()
 			.text()
-		const link = baseUrl + $(element)
+		const link = mainUrl + $(element)
 			.children()
 			.children()
 			.attr('href')
@@ -34,12 +39,19 @@ articlesRouter.get('/', async (req, res) => {
 				smallTitles
 			}
 		} catch (error) {
-
 		}
 	}))
+	return data
+}
 
-	console.log(data)
-	res.json(data)
+articlesRouter.get('/', async (req, res) => {
+	let result = []
+	for (let i = 1; i < 3; i++) {
+		result.push(await getResults(`https://blog.risingstack.com/page/${i}/`));
+	}
+
+	console.log(result)
+	res.json(result);
 });
 
 

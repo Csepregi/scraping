@@ -9,13 +9,17 @@ const App = () => {
 
   const getArticle = (event) => {
     event.preventDefault()
+    //let number = { articlenumber }
 
     articleService
-      .getAll()
+      .getAll(articlenumber)
       .then(initialArticles => setArticles(initialArticles))
     setArticleNumber('')
   }
 
+  const onChange = (event) => {
+    setArticleNumber(event.target.value)
+  }
 
   const rows = () => articles.flat().map((article) =>
     <ul key={article.title}>{article.title}
@@ -31,7 +35,7 @@ const App = () => {
         <div>
           <input
             value={articlenumber}
-            onChange={(target) => setArticleNumber(target.value)}
+            onChange={onChange}
           />
         </div>
         <button type="submit">get it</button>

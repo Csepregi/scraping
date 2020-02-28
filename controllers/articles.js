@@ -44,9 +44,10 @@ const getResults = async (siteUrl) => {
 	return data
 }
 
-articlesRouter.get('/', async (req, res) => {
+articlesRouter.get('/:number', async (req, res) => {
+	let summa = req.params.number
 	let result = []
-	for (let i = 1; i < 3; i++) {
+	for (let i = 1; i <= summa; i++) {
 		result.push(await getResults(`https://blog.risingstack.com/page/${i}/`));
 	}
 

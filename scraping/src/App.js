@@ -22,9 +22,13 @@ const App = () => {
   }
 
   const rows = () => articles.flat().map((article) =>
-    <ul key={article.title}>{article.title}
-      <li>{article.smallTitles}</li>
-    </ul>
+    <div>
+      <li key={article.title}>{article.title}
+        {article.smallTitles.map((small) =>
+          <p>{small}</p>
+        )}
+      </li>
+    </div>
   )
 
   return (

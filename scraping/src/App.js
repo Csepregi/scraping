@@ -1,6 +1,7 @@
 //import React, { useState, useEffect } from 'react';
 import React, { useState } from 'react';
 import articleService from './services/article'
+import Article from './components/Article';
 
 const App = () => {
   const [articles, setArticles] = useState([])
@@ -9,7 +10,6 @@ const App = () => {
 
   const getArticle = (event) => {
     event.preventDefault()
-    //let number = { articlenumber }
 
     articleService
       .getAll(articlenumber)
@@ -22,19 +22,12 @@ const App = () => {
   }
 
   const rows = () => articles.flat().map((article) =>
-    <div>
-      <li key={article.title}>{article.title}
-        {article.smallTitles.map((small) =>
-          <p>{small}</p>
-        )}
-      </li>
-    </div>
+    <Article article={article} />
   )
 
   return (
     <div>
       <h2>articles</h2>
-      <h2>Get Articles</h2>
       <form onSubmit={getArticle}>
         <div>
           <input

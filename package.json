@@ -14,7 +14,6 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "fetch": "^1.1.0",
-    "puppeteer": "^2.1.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.5"
   },

@@ -12,9 +12,9 @@ const Article = ({ article }) => {
 
 	return (
 		<div>
-			<li key={article.title} onClick={toggleDetails}>{article.title}
-				{article.smallTitles.map((small) =>
-					<p style={visible}>{small}</p>
+			<li key={article.title} onClick={toggleDetails} className='article'>{article.title}
+				{article.smallTitles.map((small, i) =>
+					<p style={visible} key={i} className="togglableContent">{small}</p>
 				)}
 			</li>
 		</div>

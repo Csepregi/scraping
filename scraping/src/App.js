@@ -22,7 +22,7 @@ const App = () => {
   }
 
   const rows = () => articles.flat().map((article) =>
-    <Article article={article} />
+    <Article article={article} key={article.title} />
   )
 
   return (

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import articleService from './services/article'
 import Article from './components/Article';
+import ArticleForm from './components/ArticleForm';
 
 const App = () => {
   const [articles, setArticles] = useState([])
@@ -28,15 +29,7 @@ const App = () => {
   return (
     <div>
       <h2>articles</h2>
-      <form onSubmit={getArticle}>
-        <div>
-          <input
-            value={articlenumber}
-            onChange={onChange}
-          />
-        </div>
-        <button type="submit">get it</button>
-      </form>
+      <ArticleForm onSubmit={getArticle} value={articlenumber} handleChange={onChange} />
       <ul>
         {rows()}
       </ul>
